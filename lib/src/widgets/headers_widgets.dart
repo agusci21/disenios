@@ -36,7 +36,7 @@ class HeaderDiagonal extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderPicoPainter(),
+        painter: _HeaderCurvoPainter(),
       ),
     );
   }
@@ -120,6 +120,37 @@ class _HeaderPicoPainter extends CustomPainter{
     path.lineTo(0, size.height * 0.2);
     path.lineTo(size.width * 0.5, size.height * 0.3);
     path.lineTo(size.width , size.height * 0.2);
+    path.lineTo(size.width, 0);
+    
+
+    canvas.drawPath(path, lapiz);
+    
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+
+    return true;
+  }
+
+}
+
+class _HeaderCurvoPainter extends CustomPainter{
+
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    final lapiz = Paint();
+    //Propiedades
+    lapiz.color = Color(0xff615AAB);
+    lapiz.style = PaintingStyle.fill;
+    lapiz.strokeWidth = 20;
+
+    final path = Path();
+    //dibujar Path y lapiz
+    
+    path.lineTo(0, size.height * 0.25);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.4, size.width, size.height * 0.25);
     path.lineTo(size.width, 0);
     
 
