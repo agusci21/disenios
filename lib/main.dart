@@ -1,3 +1,4 @@
+import 'package:disenios_01/src/pages/animaciones_page.dart';
 import 'package:disenios_01/src/pages/headres_page.dart';
 import 'package:flutter/material.dart';
  
@@ -9,7 +10,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      home: HeadersPage(),
+      initialRoute:'animaciones' ,
+      routes: {
+        'headers'     : (_) => HeadersPage(),
+        'animaciones' : (_) => AnimacionesPage(),
+      },
     );
   }
 }
