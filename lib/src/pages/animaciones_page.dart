@@ -20,10 +20,46 @@ class CuadradoAnimado extends StatefulWidget {
   _CuadradoAnimadoState createState() => _CuadradoAnimadoState();
 }
 
-class _CuadradoAnimadoState extends State<CuadradoAnimado> {
+class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProviderStateMixin{
+
+  late AnimationController animationController;
+  late Animation<double> rotacion;
+
+  @override
+  void initState() {
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 4000),
+    );
+    rotacion = Tween(begin: 0.0,end: 50.0).animate(animationController);
+    
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return _Rectangulo();
+
+    animationController.forward();
+
+    return AnimatedBuilder(
+      animation: animationController,
+      child: null,
+      builder: (BuildContext context, Widget? child) {
+        print(rotacion.value);
+        return Transform.rotate(
+          angle: rotacion.value,
+          child: _Rectangulo()
+        ) ;
+      },
+    );
   }
 }
 

@@ -42,6 +42,7 @@ class HeaderDiagonal extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _HeaderDiagonalPainter extends CustomPainter{
 
   @override
@@ -73,6 +74,7 @@ class _HeaderDiagonalPainter extends CustomPainter{
 
 }
 
+// ignore: unused_element
 class _HeaderTriangularPainter extends CustomPainter{
 
   @override
@@ -103,6 +105,7 @@ class _HeaderTriangularPainter extends CustomPainter{
 
 }
 
+// ignore: unused_element
 class _HeaderPicoPainter extends CustomPainter{
 
   @override
@@ -135,6 +138,7 @@ class _HeaderPicoPainter extends CustomPainter{
 
 }
 
+// ignore: unused_element
 class _HeaderCurvoPainter extends CustomPainter{
 
   @override
@@ -166,6 +170,7 @@ class _HeaderCurvoPainter extends CustomPainter{
 
 }
 
+// ignore: unused_element
 class _HeaderWavePainter extends CustomPainter{
 
   @override
