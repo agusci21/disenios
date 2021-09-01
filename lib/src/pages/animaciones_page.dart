@@ -26,6 +26,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   late AnimationController animationController;
   late Animation<double> rotacion;
   late Animation<double> opacidad;
+  late Animation<double> moverDerecha;
 
   @override
   //AQUI en el initState, se definen y configyran las animaciones
@@ -50,6 +51,8 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     opacidad = Tween(begin: 0.1, end: 1.0).animate(
       CurvedAnimation(parent: animationController, curve: Interval(0, 0.25, curve: Curves.easeOut))
     );
+
+    moverDerecha = Tween(begin: 0.0, end: 200.0).animate(animationController);
     
     super.initState();
   }
@@ -70,12 +73,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       animation: animationController,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget? child) {
-        return Transform.rotate(
-          angle: rotacion.value,
-          child: Opacity(
-            opacity: opacidad.value,
-            child: child,
-          )
+        return Transform.translate(
+          offset: Offset(moverDerecha.value,0),
+          child: Transform.rotate(
+            angle: rotacion.value,
+            child: Opacity(
+              opacity: opacidad.value,
+              child: child,
+            )
+          ),
         ) ;
       },
     );
