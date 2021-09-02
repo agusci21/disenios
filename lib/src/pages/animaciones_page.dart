@@ -78,6 +78,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       animation: animationController,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget? child) {
+
+        print('Status: ${opacidad.value}');
+        print('Status: ${rotacion.value}');
+
         return Transform.scale(
           scale: animationController.value,
           child: Transform.translate(
