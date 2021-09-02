@@ -1,5 +1,6 @@
 import 'package:disenios_01/src/pages/animaciones_page.dart';
 import 'package:disenios_01/src/pages/headres_page.dart';
+import 'package:disenios_01/src/retos/cuadrado_animado_retos.dart';
 import 'package:flutter/material.dart';
  
 void main() => runApp(MyApp());
@@ -10,10 +11,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      initialRoute:'animaciones' ,
+      initialRoute:'cuadradoAnimadoPage' ,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
+        'cuadradoAnimadoPage' : (_) => CuadradoAnimadoRetos(),
       },
     );
   }

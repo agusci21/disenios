@@ -40,6 +40,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       vsync: this,
       duration: Duration(milliseconds: 4000),
     );
+    
     rotacion = Tween(begin: 0.0,end: 2 * math.pi).animate( // Begin y end reciben datos en radianes
       // .animate(animationController); => Animaciones con velocidad constante
      CurvedAnimation(parent: animationController, curve: Curves.easeInOutBack) // Animaciones con velocidad dada por la Clase Curve
