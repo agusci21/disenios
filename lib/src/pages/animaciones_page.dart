@@ -27,6 +27,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   late Animation<double> rotacion;
   late Animation<double> opacidad;
   late Animation<double> moverDerecha;
+  late Animation<double> agrandar;
 
   @override
   //AQUI en el initState, se definen y configyran las animaciones
@@ -42,9 +43,9 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     );
 
     animationController.addListener(() {
-      print('Status: ' + animationController.status.toString());
+     
       if(animationController.status == AnimationStatus.completed){
-        animationController.repeat();
+        animationController.reset();
       }
     });
 
@@ -53,6 +54,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     );
 
     moverDerecha = Tween(begin: 0.0, end: 200.0).animate(animationController);
+
+    agrandar = Tween(begin: 0.0, end: 2.0).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.ease)
+    );
     
     super.initState();
   }
@@ -73,14 +78,17 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       animation: animationController,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget? child) {
-        return Transform.translate(
-          offset: Offset(moverDerecha.value,0),
-          child: Transform.rotate(
-            angle: rotacion.value,
-            child: Opacity(
-              opacity: opacidad.value,
-              child: child,
-            )
+        return Transform.scale(
+          scale: animationController.value,
+          child: Transform.translate(
+            offset: Offset(moverDerecha.value,0),
+            child: Transform.rotate(
+              angle: rotacion.value,
+              child: Opacity(
+                opacity: opacidad.value,
+                child: child,
+              )
+            ),
           ),
         ) ;
       },
