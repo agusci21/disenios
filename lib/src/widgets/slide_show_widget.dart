@@ -1,11 +1,14 @@
 import 'package:disenios_01/src/models/slider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//TODO Borrar
-import 'package:flutter_svg/svg.dart';
 
 class SlideShow extends StatelessWidget {
-  const SlideShow({Key? key}) : super(key: key);
+
+  final List<Widget> slides;
+
+  SlideShow({
+    required this.slides
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class SlideShow extends StatelessWidget {
       child: Center(
           child: Column(
             children: [
-              Expanded(child: _Slides()),
+              Expanded(child: _Slides(this.slides)),
               _Dots()
             ],
           )
@@ -75,7 +78,10 @@ class _Dot extends StatelessWidget {
 }
 
 class _Slides extends StatefulWidget {
-  const _Slides({Key? key}) : super(key: key);
+
+  final List<Widget>slides;
+
+  _Slides(this.slides);
 
   @override
   __SlidesState createState() => __SlidesState();
@@ -88,7 +94,6 @@ class __SlidesState extends State<_Slides> {
   @override
   void initState() {
     pageViewController.addListener(() {
-      print('Pagina Actual ${pageViewController.page}');
       Provider.of<SliderModel>(context, listen: false).currentPage = pageViewController.page as double;
     });
     super.initState();
@@ -102,15 +107,11 @@ class __SlidesState extends State<_Slides> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: PageView(
         controller: pageViewController,
-        children: [
-          _Slide(svg: 'assets/svgs/slide-1.svg',),
-          _Slide(svg: 'assets/svgs/slide-2.svg'),
-          _Slide(svg: 'assets/svgs/slide-3.svg'),
-
-        ],
+        children: widget.slides.map((slide) => _Slide(slide)).toList(),
       ),
     );
   }
@@ -118,16 +119,16 @@ class __SlidesState extends State<_Slides> {
 
 class _Slide extends StatelessWidget {
 
-  final String svg;
+  final Widget slide;
 
-  const _Slide({Key? key, required this.svg}) : super(key: key);
+  const _Slide(this.slide);
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: double.infinity,
       padding: EdgeInsets.all(30),
-      child: SvgPicture.asset(svg),
+      child: slide
     );
   }
 }
