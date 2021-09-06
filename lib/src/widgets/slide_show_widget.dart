@@ -18,7 +18,7 @@ class SlideShow extends StatelessWidget {
           child: Column(
             children: [
               Expanded(child: _Slides(this.slides)),
-              _Dots()
+              _Dots(this.slides.length)
             ],
           )
        ),
@@ -28,7 +28,10 @@ class SlideShow extends StatelessWidget {
 
 
 class _Dots extends StatelessWidget {
-  const _Dots({Key? key}) : super(key: key);
+
+  final int totalSlides;
+
+  const _Dots(this.totalSlides);
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +42,7 @@ class _Dots extends StatelessWidget {
       child: Row(
 
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-          _Dot(0),
-          _Dot(1),
-          _Dot(2),
-
-        ],
+        children: List.generate(this.totalSlides, (index) => _Dot(index)),
       ),
     );
   }
