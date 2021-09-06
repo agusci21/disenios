@@ -104,7 +104,7 @@ class _MiRadialProgress extends CustomPainter{
     canvas.drawCircle(centro, radio, paint);
 
     //Arco
-    final paintArco = new Paint();
+    //final paintArco = new Paint();
     
     paint.strokeWidth = 10;
     paint.color = Colors.pink;
