@@ -33,9 +33,9 @@ class _Dots extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          _Dot(),
-          _Dot(),
-          _Dot(),
+          _Dot(0),
+          _Dot(1),
+          _Dot(2),
 
         ],
       ),
@@ -44,9 +44,11 @@ class _Dots extends StatelessWidget {
 }
 
 class _Dot extends StatelessWidget {
-  const _Dot({
-    Key? key,
-  }) : super(key: key);
+  
+
+  final int index;
+
+  const _Dot(this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +64,36 @@ class _Dot extends StatelessWidget {
   }
 }
 
-class _Slides extends StatelessWidget {
+class _Slides extends StatefulWidget {
   const _Slides({Key? key}) : super(key: key);
+
+  @override
+  __SlidesState createState() => __SlidesState();
+}
+
+class __SlidesState extends State<_Slides> {
+
+  final pageViewController = PageController();
+
+  @override
+  void initState() {
+    pageViewController.addListener(() {
+      print('Pagina Actual ${pageViewController.page}');
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageViewController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: PageView(
+        controller: pageViewController,
         children: [
           _Slide(svg: 'assets/svgs/slide-1.svg',),
           _Slide(svg: 'assets/svgs/slide-2.svg'),
