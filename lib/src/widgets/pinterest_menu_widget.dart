@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PinterestButton{
   var onPressed;
@@ -19,24 +21,41 @@ class PinterestMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-
-        width: 250,
-        height: 60,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(100),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              offset: Offset(0,1),
-              blurRadius: 10,
-              spreadRadius: -5
-            )
-          ]
+      child: ChangeNotifierProvider(
+        create: (_) => _MenuModel(),
+        child: _MenuBackGround(
+          child: _MenuItems(items),
         ),
-        child:_MenuItems(items),
       ),
+    );
+  }
+}
+
+class _MenuBackGround extends StatelessWidget {
+  
+  final Widget child;
+
+  _MenuBackGround({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+      width: 250,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(100),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black38,
+            offset: Offset(0,1),
+            blurRadius: 10,
+            spreadRadius: -5
+          )
+        ]
+      ),
+      child: this.child,
     );
   }
 }
@@ -65,16 +84,33 @@ class _PinterestMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final itemSeleccionado = Provider.of<_MenuModel>(context).itemSeleccionado;
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: item.onPressed,
+      onTap: (){
+        Provider.of<_MenuModel>(context, listen: false).itemSeleccionado = index;
+        item.onPressed();
+      },
       child: Container(
         child: Icon(
           item.icon,
-          size: 30,
-          color: Colors.blueGrey,
+          size: (itemSeleccionado == index) ? 35 : 25,
+          color: (itemSeleccionado == index) ? Colors.black : Colors.blueGrey,
         ),
       ),
     );
   }
+}
+
+class _MenuModel with ChangeNotifier{
+
+  int _itemSeleccionado = 0;
+  int get itemSeleccionado => _itemSeleccionado;
+  set itemSeleccionado (int index){
+    this._itemSeleccionado = index;
+    notifyListeners();
+  }
+
 }
