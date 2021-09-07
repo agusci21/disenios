@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+class PinterestButton{
+  final Function onPressed;
+  final IconData icon;
+
+  PinterestButton({required this.onPressed, required this.icon});
+}
+
+class PinterestMenu extends StatelessWidget {
+
+  final List<PinterestButton> items = [
+    PinterestButton(onPressed: (){print('pie_chart');}, icon: Icons.pie_chart),
+    PinterestButton(onPressed: (){print('search');}, icon: Icons.search),
+    PinterestButton(onPressed: (){print('notifications');}, icon: Icons.notifications),
+    PinterestButton(onPressed: (){print('supervised_user_circle');}, icon: Icons.supervised_user_circle),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        child: Text('Hola mundo'),
+      ),
+    );
+  }
+}
