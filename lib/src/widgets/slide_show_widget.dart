@@ -1,42 +1,63 @@
-import 'package:disenios_01/src/models/slider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SlideShow extends StatelessWidget {
 
-  final List<Widget> slides;
+  List<Widget> slides;
   bool puntosAriba;
-  final Color prymariColor;
-  final Color secondaryColor;
+  Color primaryColor;
+  Color secondaryColor;
 
   SlideShow({
     required this.slides,
     this.puntosAriba = false,
-    this.prymariColor = Colors.blue,
+    this.primaryColor = Colors.blue,
     this.secondaryColor = Colors.grey,
   });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SliderModel(),
+      create: (_) => _SlideShowModel(),
       child: SafeArea(
         child: Center(
-            child: Column(
-              children: [
-
-                if(puntosAriba) 
-                  _Dots(this.slides.length, this.prymariColor, this.secondaryColor),
-               
-                Expanded(child: _Slides(this.slides)),
-
-                if(!puntosAriba) 
-                  _Dots(this.slides.length, this.prymariColor, this.secondaryColor),
-
-              ],
+            child: Builder(
+              builder: (BuildContext context) {
+                Provider.of<_SlideShowModel>(context)._primaryColor = this.primaryColor;
+                Provider.of<_SlideShowModel>(context)._secondaryColor = this.secondaryColor;
+                return _CreateStructureColumn(puntosAriba: puntosAriba, slides: slides);
+              }
             )
          ),
       ),
+    );
+  }
+}
+
+class _CreateStructureColumn extends StatelessWidget {
+  const _CreateStructureColumn({
+    Key? key,
+    required this.puntosAriba,
+    required this.slides,
+  }) : super(key: key);
+
+  final bool puntosAriba;
+  final List<Widget> slides;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+
+        if(puntosAriba) 
+          _Dots(this.slides.length,),
+       
+        Expanded(child: _Slides(this.slides)),
+
+        if(!puntosAriba) 
+          _Dots(this.slides.length, ),
+
+      ],
     );
   }
 }
@@ -45,10 +66,8 @@ class SlideShow extends StatelessWidget {
 class _Dots extends StatelessWidget {
 
   final int totalSlides;
-  final Color prymariColor;
-  final Color secondaryColor;
 
-  const _Dots(this.totalSlides, this.prymariColor, this.secondaryColor);
+  const _Dots(this.totalSlides);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +78,7 @@ class _Dots extends StatelessWidget {
       child: Row(
 
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(this.totalSlides, (index) => _Dot(index, this.prymariColor, this.secondaryColor)),
+        children: List.generate(this.totalSlides, (index) => _Dot(index)),
       ),
     );
   }
@@ -69,15 +88,13 @@ class _Dot extends StatelessWidget {
   
 
   final int index;
-  final Color prymariColor;
-  final Color secondaryColor;
-
-  const _Dot(this.index, this.prymariColor, this.secondaryColor);
+  
+  const _Dot(this.index);
 
   @override
   Widget build(BuildContext context) {
 
-    final pageViewIndex = Provider.of<SliderModel>(context).currentPage;
+    final slideShowModel = Provider.of<_SlideShowModel>(context);
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
@@ -86,8 +103,8 @@ class _Dot extends StatelessWidget {
       width: 15,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: (pageViewIndex >= index -0.5 && pageViewIndex < index +0.5)
-         ? this.prymariColor : this.secondaryColor
+        color: (slideShowModel.currentPage >= index -0.5 && slideShowModel._currentPage < index +0.5)
+         ? slideShowModel._primaryColor : slideShowModel.secondaryColor
       ),
     );
   }
@@ -110,7 +127,7 @@ class __SlidesState extends State<_Slides> {
   @override
   void initState() {
     pageViewController.addListener(() {
-      Provider.of<SliderModel>(context, listen: false).currentPage = pageViewController.page as double;
+      Provider.of<_SlideShowModel>(context, listen: false).currentPage = pageViewController.page as double;
     });
     super.initState();
   }
@@ -147,4 +164,31 @@ class _Slide extends StatelessWidget {
       child: slide
     );
   }
+}
+
+class _SlideShowModel with ChangeNotifier{
+
+  double _currentPage = 0;
+  Color _primaryColor = Colors.blue;
+  Color _secondaryColor = Colors.grey;
+
+  double get currentPage => this._currentPage;
+
+  set currentPage(double currentPage){
+    this._currentPage = currentPage;
+    notifyListeners();
+  }
+
+  Color get primaryColor => this._primaryColor;
+  set primaryColor (Color color){
+    this._primaryColor = color;
+    notifyListeners();
+  }
+
+  Color get secondaryColor => this._secondaryColor;
+  set secondaryColor (Color color){
+    this._secondaryColor = color;
+    notifyListeners();
+  }
+
 }
