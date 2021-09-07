@@ -5,6 +5,8 @@ import 'package:disenios_01/src/pages/headres_page.dart';
 import 'package:disenios_01/src/pages/slide_show_page.dart';
 import 'package:disenios_01/src/retos/cuadrado_animado_retos.dart';
 import 'package:flutter/material.dart';
+
+import 'src/pages/pinterest_page.dart';
  
 void main() => runApp(MyApp());
  
@@ -14,14 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      initialRoute:'slideShowPage' ,
+      initialRoute:'pinterestPage' ,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
-        'cuadradoAnimadoPage'  : (_) => CuadradoAnimadoRetos(),
-        'circularProgressPage' : (_) => CircularProgresPage(),
+        'cuadradoAnimadoPage'   : (_) => CuadradoAnimadoRetos(),
+        'circularProgressPage'  : (_) => CircularProgresPage(),
         'graficasCircularesPage': (_) => GraficasCircularesPage(),
         'slideShowPage' : (_) => SlideShowPage(),
+        'pinterestPage' : (_) => PinterestPage(),
       },
     );
   }
