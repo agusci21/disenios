@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PinterestButton{
-  final Function onPressed;
+  var onPressed;
   final IconData icon;
 
   PinterestButton({required this.onPressed, required this.icon});
@@ -20,7 +20,6 @@ class PinterestMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-
 
         width: 250,
         height: 60,
@@ -66,8 +65,16 @@ class _PinterestMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Icon(item.icon),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: item.onPressed,
+      child: Container(
+        child: Icon(
+          item.icon,
+          size: 30,
+          color: Colors.blueGrey,
+        ),
+      ),
     );
   }
 }
