@@ -15,24 +15,18 @@ class PinterestMenu extends StatelessWidget {
 
   final Color backGroundColor;
   final Color activeColor; 
-  final Color inactiveColor; 
+  final Color inactiveColor;
+
+  final List<PinterestButton> items; 
 
    PinterestMenu({
     this.mostrar = true,
     this.backGroundColor = Colors.white,
     this.activeColor = Colors.black,
-    this.inactiveColor = Colors.blueGrey
+    this.inactiveColor = Colors.blueGrey,
+    required this.items
   });
   
-  final List<PinterestButton> items = [
-    PinterestButton(onPressed: (){print('pie_chart');}, icon: Icons.pie_chart),
-    PinterestButton(onPressed: (){print('search');}, icon: Icons.search),
-    PinterestButton(onPressed: (){print('notifications');}, icon: Icons.notifications),
-    PinterestButton(onPressed: (){print('supervised_user_circle');}, icon: Icons.supervised_user_circle),
-  ];
-
-
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

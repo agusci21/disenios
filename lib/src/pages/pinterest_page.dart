@@ -40,6 +40,12 @@ class _PinterestMenuLocation extends StatelessWidget {
             mostrar: mostrar,
             activeColor: Colors.green,
             inactiveColor: Colors.yellow,
+            items: [
+              PinterestButton(onPressed: (){print('pie_chart');}, icon: Icons.pie_chart),
+              PinterestButton(onPressed: (){print('search');}, icon: Icons.search),
+              PinterestButton(onPressed: (){print('notifications');}, icon: Icons.notifications),
+              PinterestButton(onPressed: (){print('supervised_user_circle');}, icon: Icons.supervised_user_circle),
+            ],
           ),
         ),
       ),
