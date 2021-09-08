@@ -1,20 +1,24 @@
 import 'package:disenios_01/src/widgets/pinterest_menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 
 class PinterestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          PinterestGrid(),
-          _PinterestMenuLocation()
-        ],
-      )
-   );
+    return ChangeNotifierProvider(
+      create: (_) => MenuModel(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            PinterestGrid(),
+            _PinterestMenuLocation()
+          ],
+        )
+       ),
+    );
   }
 }
 
@@ -25,13 +29,16 @@ class _PinterestMenuLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mostrar = Provider.of<MenuModel>(context).mostrar;
     final double sw = MediaQuery.of(context).size.width;
     return Positioned(
       bottom: 30,
       child: Container(
         width: sw,
         child: Align(
-          child: PinterestMenu(),
+          child: PinterestMenu(
+            mostrar: mostrar,
+          ),
         ),
       ),
     );
@@ -54,9 +61,9 @@ class _PinterestGridState extends State<PinterestGrid> {
   void initState() {
     controller.addListener(() {
       if(controller.offset > scrollAnterior){
-        print('Ocultar El Menu');
+        Provider.of<MenuModel>(context, listen: false).mostrar = false;
       }else{
-        print('Mostrar menu');
+        Provider.of<MenuModel>(context, listen: false).mostrar = true;
       }
       scrollAnterior = controller.offset;
     });
@@ -103,6 +110,16 @@ class _PinterestItem extends StatelessWidget {
             backgroundColor: Colors.white,
             child: new Text('$index'),
           ),
-        ));
+        )
+      );
+  }
+}
+
+class MenuModel with ChangeNotifier{
+  bool _mostrar = true;
+  bool get mostrar => this._mostrar;
+  set mostrar (bool value){
+    this._mostrar = value;
+    notifyListeners();
   }
 }
