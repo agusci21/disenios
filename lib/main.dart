@@ -1,5 +1,6 @@
 import 'package:disenios_01/src/pages/animaciones_page.dart';
 import 'package:disenios_01/src/labs/circular_progres_page.dart';
+import 'package:disenios_01/src/pages/emergency_page.dart';
 import 'package:disenios_01/src/pages/graficas_circulares_page.dart';
 import 'package:disenios_01/src/pages/headres_page.dart';
 import 'package:disenios_01/src/pages/slide_show_page.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      initialRoute:'pinterestPage' ,
+      initialRoute:'emergenyPage' ,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         'graficasCircularesPage': (_) => GraficasCircularesPage(),
         'slideShowPage' : (_) => SlideShowPage(),
         'pinterestPage' : (_) => PinterestPage(),
+        'emergenyPage'  : (_) => EmergenyPage(),
       },
     );
   }
