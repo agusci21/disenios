@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:disenios_01/src/widgets/boton_gordo_widget.dart';
 import 'package:disenios_01/src/widgets/headers_widgets.dart';
 import 'package:flutter/material.dart';
@@ -40,12 +41,15 @@ class EmergenyPage extends StatelessWidget {
     // FERNANDO WAY
 
     List<Widget> itemMap = items.map(
-      (item) => BotonGordo(
-        icon: item.icon as IconData,
-        texto: item.texto as String,
-        color1: item.color1 as Color,
-        color2: item.color2 as Color,
-        onPressed: (){})
+      (item) => FadeInLeft(
+        duration: Duration(milliseconds: 250),
+        child: BotonGordo(
+          icon: item.icon as IconData,
+          texto: item.texto as String,
+          color1: item.color1 as Color,
+          color2: item.color2 as Color,
+          onPressed: (){}),
+      )
     ).toList();
 
     // MY WAY
