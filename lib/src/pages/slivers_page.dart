@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 
 
 class SliverPage extends StatelessWidget {
@@ -8,26 +7,39 @@ class SliverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _Titulo()
+      body: _ListaTareas()
    );
   }
 }
 
 class _ListaTareas extends StatelessWidget {
+
+   final items = [
+    _ListItem( 'Orange', Color(0xffF08F66) ),
+    _ListItem( 'Family', Color(0xffF2A38A) ),
+    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
+    _ListItem( 'Books', Color(0xffFCEBAF) ),
+    _ListItem( 'Orange', Color(0xffF08F66) ),
+    _ListItem( 'Family', Color(0xffF2A38A) ),
+    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
+    _ListItem( 'Books', Color(0xffFCEBAF) ),
+  ];
  
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 20,
-      itemBuilder: (_, int index) => _ListItem()
+      itemCount: items.length,
+      itemBuilder: (_, int index) => items[index]
     );
   }
 }
 
 class _ListItem extends StatelessWidget {
-  const _ListItem({
-    Key? key,
-  }) : super(key: key);
+  
+  final String titulo;
+  final Color color;
+
+  const _ListItem(this.titulo, this.color) ;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +49,10 @@ class _ListItem extends StatelessWidget {
       margin: EdgeInsets.all(10),
       height: 130,
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: this.color,
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Text('Orange', style: TextStyle(fontSize: 20, color: Colors.white),),
+      child: Text(this.titulo, style: TextStyle(fontSize: 20, color: Colors.white),),
     );
   }
 }
