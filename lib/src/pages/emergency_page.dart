@@ -10,7 +10,11 @@ class EmergenyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: BotonGordo(),
+        child: BotonGordo(
+          icon: FontAwesomeIcons.carCrash,
+          onPressed: (){},
+          color1: Colors.black,
+        ),
       )
    );
   }

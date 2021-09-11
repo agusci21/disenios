@@ -2,19 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BotonGordo extends StatelessWidget {
-  const BotonGordo({Key? key}) : super(key: key);
+
+  final IconData icon;
+  final String texto;
+  final Color color1;
+  final Color color2;
+  final Function onPressed;
+
+  const BotonGordo({
+    required this.icon,
+    this.texto = '',
+    this.color1 = Colors.grey,
+    this.color2 = Colors.blueGrey,
+    required this.onPressed
+  }) ;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _BotonGordoBackground(),
+        _BotonGordoBackground(
+          color1: this.color1,
+          color2: this.color2,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 140, width: 40,),
-            FaIcon(FontAwesomeIcons.carCrash, color: Colors.white, size: 40,),
-            Expanded(child: Text('   Motor Accident', style: TextStyle(color: Colors.white,fontSize: 18),)),
+            FaIcon(this.icon, color: Colors.white, size: 40,),
+            Expanded(child: Text(this.texto, style: TextStyle(color: Colors.white,fontSize: 18),)),
             FaIcon(FontAwesomeIcons.chevronRight, color: Colors.white,),
             SizedBox(width: 40,)
           ],
@@ -25,6 +41,14 @@ class BotonGordo extends StatelessWidget {
 }
 
 class _BotonGordoBackground extends StatelessWidget {
+
+  final Color color1;
+  final Color color2;
+
+  const _BotonGordoBackground({
+    required this.color1,
+    required this.color2,
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -39,8 +63,8 @@ class _BotonGordoBackground extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
           colors: [
-            Color(0xff6989F5),
-            Color(0xff906EF5)
+           this.color1,
+           this.color2,
           ]
         )
       ),
