@@ -8,6 +8,7 @@ import 'package:disenios_01/src/retos/cuadrado_animado_retos.dart';
 import 'package:flutter/material.dart';
 
 import 'src/pages/pinterest_page.dart';
+import 'src/pages/slivers_page.dart';
  
 void main() => runApp(MyApp());
  
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      initialRoute:'emergenyPage' ,
+      initialRoute:'sliverPage' ,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         'slideShowPage' : (_) => SlideShowPage(),
         'pinterestPage' : (_) => PinterestPage(),
         'emergenyPage'  : (_) => EmergenyPage(),
+        'sliverPage'    : (_) => SliverPage(),
       },
     );
   }
