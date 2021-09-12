@@ -4,6 +4,7 @@ import 'package:disenios_01/src/pages/animate_do_page.dart';
 import 'package:disenios_01/src/pages/emergency_page.dart';
 import 'package:disenios_01/src/pages/graficas_circulares_page.dart';
 import 'package:disenios_01/src/pages/headres_page.dart';
+import 'package:disenios_01/src/pages/launcher_page.dart';
 import 'package:disenios_01/src/pages/slide_show_page.dart';
 import 'package:disenios_01/src/pages/twitter_page.dart';
 import 'package:disenios_01/src/retos/cuadrado_animado_retos.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
-      initialRoute:'animacionPage' ,
+      initialRoute:'launcher' ,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         'animateDo1'    : (_) => AnimateDo1Page(),
         'twitter'       : (_) => TwitterPagePage(),
         'animacionPage' : (_) => NavegacionPage(),
+        'launcher'      : (_) => LauncherPage(),
       },
     );
   }
