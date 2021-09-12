@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:disenios_01/src/pages/twitter_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +16,9 @@ class AnimateDo1Page extends StatelessWidget {
         appBar: AppBar(
           title: Text('Animate_do'),
           actions: [
-            IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.twitter)),
+            IconButton(onPressed: (){
+              Navigator.pushReplacement(context, CupertinoPageRoute(builder: (BuildContext context) => TwitterPagePage()));
+            }, icon: FaIcon(FontAwesomeIcons.twitter)),
             IconButton(onPressed: (){}, icon: Icon(Icons.navigate_next))
           ],
     
