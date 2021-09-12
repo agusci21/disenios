@@ -10,61 +10,9 @@ class SliverPage extends StatelessWidget {
       body: Stack(
         children: [
           _MainScroll(),
-          //_BotonBajo() NO SIRVE
         ],
       )
    );
-  }
-}
-
-class _BotonBajo extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    final double sw = MediaQuery.of(context).size.width;
-    return Positioned(
-      bottom: -10,
-      right: -10,
-      child: Container(
-        width: sw * 0.9,
-        child: ElevatedButton(
-          style: ButtonStyle(
-          ),
-          onPressed: (){},
-          child: Text(
-            'CREATE NEW LIST',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 3
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ListaTareas extends StatelessWidget {
-
-   final items = [
-    _ListItem( 'Orange', Color(0xffF08F66) ),
-    _ListItem( 'Family', Color(0xffF2A38A) ),
-    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
-    _ListItem( 'Books', Color(0xffFCEBAF) ),
-    _ListItem( 'Orange', Color(0xffF08F66) ),
-    _ListItem( 'Family', Color(0xffF2A38A) ),
-    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
-    _ListItem( 'Books', Color(0xffFCEBAF) ),
-  ];
- 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (_, int index) => items[index]
-    );
   }
 }
 
@@ -193,16 +141,13 @@ class _SliverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // TODO: implement build
     return SizedBox.expand(child: child,);
   }
 
   @override
-  // TODO: implement maxExtent
   double get maxExtent => maxHeight; // ESTA ES BUENA PRACTICA => minHeight > maxHeight ? maxHeight : minHeight;
 
   @override
-  // TODO: implement minExtent
   double get minExtent => minHeight; //ESTA ES MEDIA MALA PRACTICA
 
   @override
