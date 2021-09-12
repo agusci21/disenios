@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 
 class NavegacionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Text('Notifications Page'),
-      ),
-
-      floatingActionButton: _BotonFlotante(),
-
-      bottomNavigationBar: _BottomNavigation(),
-
-      //body: ,
-   );
+    return ChangeNotifierProvider(
+      create: (_) => _NotificationService(),
+      child: Scaffold(
+    
+        appBar: AppBar(
+          backgroundColor: Colors.pink,
+          title: Text('Notifications Page'),
+        ),
+    
+        floatingActionButton: _BotonFlotante(),
+    
+        bottomNavigationBar: _BottomNavigation(),
+    
+        //body: ,
+       ),
+    );
   }
 }
 
@@ -26,9 +30,14 @@ class _BotonFlotante extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FloatingActionButton(
       backgroundColor: Colors.pink,
-      onPressed: (){}, 
+      onPressed: (){
+        int numero = Provider.of<_NotificationService>(context, listen: false).numero;
+        numero++;
+        Provider.of<_NotificationService>(context, listen: false).numero = numero;
+      }, 
       child: FaIcon(FontAwesomeIcons.play),
     );
   }
@@ -38,6 +47,9 @@ class _BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+  final int numero = Provider.of<_NotificationService>(context).numero;
+    
     return BottomNavigationBar(
       currentIndex: 0,
       selectedItemColor: Colors.pink,
@@ -63,7 +75,7 @@ class _BottomNavigation extends StatelessWidget {
                     color: Colors.pink,
                     shape: BoxShape.circle
                   ),
-                  child: Text('1', style: TextStyle(color: Colors.white, fontSize: 15),),
+                  child: Text('$numero', style: TextStyle(color: Colors.white, fontSize: 15),),
                 ),
               )
             ],
@@ -79,4 +91,15 @@ class _BottomNavigation extends StatelessWidget {
       ],
     );
   }
+}
+
+class _NotificationService extends ChangeNotifier{
+
+  int _numero = 0;
+  int get numero => this._numero;
+  set numero (int value){
+    this._numero = value;
+    notifyListeners();
+  }
+
 }
