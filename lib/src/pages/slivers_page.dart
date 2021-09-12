@@ -7,8 +7,42 @@ class SliverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _MainScroll()
+      body: Stack(
+        children: [
+          _MainScroll(),
+          //_BotonBajo() NO SIRVE
+        ],
+      )
    );
+  }
+}
+
+class _BotonBajo extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final double sw = MediaQuery.of(context).size.width;
+    return Positioned(
+      bottom: -10,
+      right: -10,
+      child: Container(
+        width: sw * 0.9,
+        child: ElevatedButton(
+          style: ButtonStyle(
+          ),
+          onPressed: (){},
+          child: Text(
+            'CREATE NEW LIST',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 3
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -135,7 +169,10 @@ class _MainScroll extends StatelessWidget {
         ),
 
         SliverList(
-          delegate: SliverChildListDelegate(items)
+          delegate: SliverChildListDelegate([
+            ...items,
+            SizedBox(height: 100,)
+          ])
         ),
       ],
     );
