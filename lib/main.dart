@@ -8,21 +8,30 @@ import 'package:disenios_01/src/pages/launcher_page.dart';
 import 'package:disenios_01/src/pages/slide_show_page.dart';
 import 'package:disenios_01/src/pages/twitter_page.dart';
 import 'package:disenios_01/src/retos/cuadrado_animado_retos.dart';
+import 'package:disenios_01/src/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'src/pages/navegacionPage.dart';
 import 'src/pages/pinterest_page.dart';
 import 'src/pages/slivers_page.dart';
  
-void main() => runApp(MyApp());
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: (_) => ThemeChanger(2),
+    child: MyApp()
+  )
+);
  
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños app',
       initialRoute:'launcher' ,
+      theme: appTheme.currentTheme,
       routes: {
         'headers'     : (_) => HeadersPage(),
         'animaciones' : (_) => AnimacionesPage(),
