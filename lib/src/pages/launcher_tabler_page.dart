@@ -1,3 +1,4 @@
+import 'package:disenios_01/src/pages/slide_show_page.dart';
 import 'package:disenios_01/src/routes/routes.dart';
 import 'package:disenios_01/src/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,32 @@ class LauncherTabletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
       drawer: _MenuPrincipal(),
       appBar: AppBar(
         title: Text('Diseños en Flutter - tablet '),
       ),
-      body: _ListaOpciones(),
+      body: Row(
+        children: [
+          Container(
+            width: 300,
+            height: double.infinity,
+            child: _ListaOpciones(),
+          ),
+
+          Container(
+            width: 1,
+            height: double.infinity,
+            color: (appTheme.darkTheme) ? Colors.grey : appTheme.currentTheme.accentColor,
+          ),
+
+          Expanded(child: SlideShowPage())
+
+        ],
+      ),
    );
   }
 }
