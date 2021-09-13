@@ -1,3 +1,4 @@
+import 'package:disenios_01/src/models/layout_model.dart';
 import 'package:disenios_01/src/pages/animaciones_page.dart';
 import 'package:disenios_01/src/labs/circular_progres_page.dart';
 import 'package:disenios_01/src/pages/animate_do_page.dart';
@@ -13,16 +14,27 @@ import 'package:disenios_01/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'src/models/slider_model.dart';
 import 'src/pages/navegacionPage.dart';
 import 'src/pages/pinterest_page.dart';
 import 'src/pages/slivers_page.dart';
  
-void main() => runApp(
-  ChangeNotifierProvider(
-    create: (_) => ThemeChanger(2),
-    child: MyApp()
-  )
-);
+void main() => runApp(AppState());
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LayoutModel()),
+        ChangeNotifierProvider(create: (_) => ThemeChanger(0)),
+      ],
+      child: MyApp(),
+    );
+  }
+}
  
 class MyApp extends StatelessWidget {
   @override

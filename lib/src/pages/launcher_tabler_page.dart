@@ -1,3 +1,4 @@
+import 'package:disenios_01/src/models/layout_model.dart';
 import 'package:disenios_01/src/pages/slide_show_page.dart';
 import 'package:disenios_01/src/routes/routes.dart';
 import 'package:disenios_01/src/theme/theme.dart';
@@ -12,6 +13,7 @@ class LauncherTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
 
     return Scaffold(
       drawer: _MenuPrincipal(),
@@ -32,7 +34,7 @@ class LauncherTabletPage extends StatelessWidget {
             color: (appTheme.darkTheme) ? Colors.grey : appTheme.currentTheme.accentColor,
           ),
 
-          Expanded(child: SlideShowPage())
+          Expanded(child: layoutModel.currentPage)
 
         ],
       ),
@@ -46,6 +48,7 @@ class _ListaOpciones extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
 
     return ListView.separated(
 
@@ -59,8 +62,7 @@ class _ListaOpciones extends StatelessWidget {
         title: Text(pageRoutes[i].titulo),
         trailing: Icon(Icons.chevron_right, color: appTheme.currentTheme.accentColor,),
         onTap: (){
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => pageRoutes[i].page));
+          layoutModel.currentPage = pageRoutes[i].page;
         },
       ),
     );
