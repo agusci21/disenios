@@ -5,14 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 
-class LauncherPage extends StatelessWidget {
+class LauncherTabletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _MenuPrincipal(),
       appBar: AppBar(
-        title: Text('Diseños en Flutter - Telefono'),
+        title: Text('Diseños en Flutter - tablet '),
       ),
       body: _ListaOpciones(),
    );
@@ -75,6 +75,7 @@ class _MenuPrincipal extends StatelessWidget {
             ),
 
             Container(color: appTheme.currentTheme.accentColor, width: double.infinity, height: 2,),
+
 
             ListTile(
               trailing: Switch.adaptive(
