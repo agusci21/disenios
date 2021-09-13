@@ -1,3 +1,4 @@
+import 'package:disenios_01/src/pages/animate_do_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +18,7 @@ final pageRoutes = <_Routes> [
   _Routes(FontAwesomeIcons.circleNotch, 'Circulo de Progreso', GraficasCircularesPage()),
   _Routes(FontAwesomeIcons.pinterest, 'Pinterest', PinterestPage()),
   _Routes(FontAwesomeIcons.mobile, 'Slivers', SlideShowPage()),
-  //TODO hacer la  ruta de Animate do
-
+  _Routes(FontAwesomeIcons.adjust, 'Animations', AnimateDo1Page()),
 ];
 
 class _Routes{
